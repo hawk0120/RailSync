@@ -4,7 +4,6 @@ import kotlinx.coroutines.sync.Mutex
 import java.time.LocalTime
 
 
-// Data Models
 data class Station(val name: String)
 data class Route(val start: Station, val end: Station, val distanceKm: Int, val track: Mutex = Mutex())
 data class Train(val id: String, val type: TrainType, val speedKmH: Int, val capacity: Int)

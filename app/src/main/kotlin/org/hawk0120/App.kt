@@ -7,8 +7,6 @@ import kotlinx.coroutines.sync.withLock
 import kotlin.random.Random
 import java.time.LocalTime
 
-
-// Random Data Generation
 object TrainGenerator {
     private val stationNames = listOf("Amsterdam", "Rotterdam", "Utrecht", "Eindhoven",
                                     "Groningen", "Maastricht", "Den Haag", "Leiden",
@@ -45,8 +43,6 @@ object TrainGenerator {
 }
 
 
-
-// Coroutine-based Train Scheduling Simulation with Track Availability
 suspend fun runSimulation() = coroutineScope {
     val routes = List(200) { TrainGenerator.randomRoute() } // Generate random shared routes
     val schedules = List(250) {
@@ -57,17 +53,15 @@ suspend fun runSimulation() = coroutineScope {
 
     val events = mutableListOf<TrainEvent>()
 
-    // Add departure events
+
     schedules.sortedBy { it.departure }.forEach { schedule ->
         events.add(TrainEvent(schedule.departure, schedule, "departure"))
     }
 
-    // Add arrival events
     schedules.sortedBy { it.arrival }.forEach { schedule ->
         events.add(TrainEvent(schedule.arrival, schedule, "arrival"))
     }
 
-// Sort the events by time
     val sortedEvents = events.sortedBy { it.time }
 
     sortedEvents.forEach { event ->
@@ -90,7 +84,6 @@ suspend fun runSimulation() = coroutineScope {
     }
 }
 
-// Main Function
 fun main() = runBlocking {
     println("Starting Train Simulation with Track Availability...")
     runSimulation()
